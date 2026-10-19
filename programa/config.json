@@ -1,0 +1,34 @@
+{
+ "_doc": "Parâmetros da pauta do programa Jornal da Manhã. Gerado por tools/configurar.py a partir de cliente.json.",
+ "programa": "Jornal da Manhã",
+ "veiculo": "Rádio Demonstração",
+ "apresentadores": [
+  "Apresentador 1",
+  "Apresentador 2"
+ ],
+ "horario": "07:00",
+ "itens": 6,
+ "linhas_resumo": 5,
+ "metafora_percentual": 25,
+ "perguntas_por_item": 3,
+ "fontes_por_item": "2 a 4",
+ "linha_editorial": "Visão de direita e conservadora: defesa da liberdade de expressão, do Estado de Direito, da responsabilidade fiscal, da segurança pública, da família e dos limites do poder do Judiciário. Fatos sempre verificáveis; opinião sempre identificada como análise.",
+ "fontes_preferidas": [
+  "Gazeta do Povo",
+  "Revista Oeste",
+  "Jovem Pan",
+  "O Antagonista",
+  "Diário do Poder",
+  "Pleno.News"
+ ],
+ "blocos": [
+  "Política nacional",
+  "STF e instituições",
+  "Economia",
+  "Segurança pública",
+  "Minas Gerais",
+  "Internacional",
+  "Educação"
+ ],
+ "virada_hora": 14
+}

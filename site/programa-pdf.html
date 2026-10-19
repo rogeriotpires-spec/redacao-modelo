@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pauta do programa</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Tinos:wght@700&display=swap" rel="stylesheet">
+<style>
+/* Paleta da pauta: a cor de destaque vem da cor do cliente (cliente.json). */
+:root{
+  --preto:#0b0908;--papel:#ffffff;--brasa:#a63922;--brasa-esc:#7e2a18;--ambar:#c4672a;--ambar-cl:#e39a52;
+  --cinza:#6f655e;--linha:#e6ddd5;--tinta:#f6f0ea;--tinta2:#eee2d7;
+  --serif:"Source Serif 4",Georgia,serif;--mast:"Tinos","Times New Roman",serif;
+  --cond:"Barlow Condensed","Arial Narrow",Arial,sans-serif;--mono:"IBM Plex Mono",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@page{size:A4;margin:17mm 17mm 19mm;
+  @bottom-left{content:"PAUTA DO PROGRAMA";font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:7.5pt;letter-spacing:.18em;color:#6f655e;vertical-align:middle}
+  @bottom-right{content:counter(page);font-family:"IBM Plex Mono",monospace;font-size:8pt;color:#fff;background:#333;width:9mm;height:6mm;text-align:center;vertical-align:middle}}
+@page :first{margin-top:0}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--papel)}
+body{color:var(--preto);font-family:var(--serif);font-size:10.2pt;line-height:1.48;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,p,ul,ol{margin:0}
+a{color:inherit;text-decoration:none}
+
+/* tela: pré-visualização da folha */
+@media screen{
+  body{background:#e9e4de;padding:24px 12px 60px}
+  .folha{max-width:210mm;margin:0 auto;background:#fff;padding:0 17mm 20mm;box-shadow:0 10px 40px rgba(0,0,0,.15)}
+  .barra{position:sticky;top:0;z-index:5;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0 auto 16px;max-width:210mm}
+  .barra button,.barra a{font:600 13px/1 system-ui,sans-serif;border:0;border-radius:999px;padding:10px 16px;cursor:pointer;background:var(--brasa);color:#fff}
+  .barra a{background:#fff;color:var(--preto);border:1px solid var(--linha)}
+}
+@media print{.barra{display:none}.folha{padding:0}}
+
+/* cabeçalho */
+.mast{background:var(--preto);color:#fff;margin:0 -17mm;padding:13mm 17mm 9mm;display:flex;gap:7mm;align-items:center;position:relative;overflow:hidden}
+.mast::after{content:"";position:absolute;inset:auto 0 0 0;height:2.2mm;background:linear-gradient(90deg,var(--brasa),var(--ambar) 55%,var(--ambar-cl))}
+.mast img{width:25mm;height:auto;display:block;flex:none}
+.mast-nome{font-family:var(--mast);font-weight:700;font-size:29pt;letter-spacing:.07em;line-height:.9;text-transform:uppercase}
+.mast-sub{font-family:var(--cond);font-weight:600;font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:#d8c9bd;border-top:2px solid var(--brasa);padding-top:2.2mm;margin-top:2.6mm}
+.capa{padding:9mm 0 2mm}
+.kick{font-family:var(--cond);font-weight:700;font-size:9.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--brasa)}
+.capa h1{font-family:var(--serif);font-weight:900;font-size:27pt;line-height:1.02;letter-spacing:-.012em;margin:2.5mm 0 4mm;max-width:165mm}
+.abertura{font-size:11.2pt;line-height:1.55;color:#2b2522;text-align:justify;hyphens:auto}
+.indice{margin-top:7mm;border-top:1.4pt solid var(--preto)}
+.indice h3,.box-h{font-family:var(--cond);font-weight:700;font-size:9pt;letter-spacing:.18em;text-transform:uppercase;color:var(--cinza);margin:3mm 0 1.5mm}
+.indice ol{list-style:none;padding:0}
+.indice li{display:grid;grid-template-columns:9mm 34mm 1fr;align-items:baseline;gap:3mm;padding:2.1mm 0;border-bottom:1px solid var(--linha)}
+.n{font-family:var(--serif);font-weight:900;color:#fff;background:var(--brasa);text-align:center;font-size:10pt;line-height:1.5}
+.indice .bl{font-family:var(--cond);font-weight:600;font-size:8.6pt;letter-spacing:.12em;text-transform:uppercase;color:var(--ambar)}
+.indice .t{font-weight:600;font-size:10.6pt;line-height:1.3}
+.agenda{margin-top:6mm;background:var(--tinta);padding:3.5mm 5mm 4mm;break-inside:avoid}
+.agenda .box-h{margin-top:0;color:var(--brasa)}
+.ag{display:grid;grid-template-columns:16mm 1fr;gap:3mm;padding:1.2mm 0;border-top:1px solid var(--tinta2);font-size:9.6pt}
+.ag:first-of-type{border-top:0}
+.ag b{font-family:var(--mono);font-weight:500;color:var(--brasa-esc)}
+
+/* itens */
+.item{padding-top:8mm;margin-top:8mm;border-top:1.4pt solid var(--preto)}
+.item.novo{break-before:page;border-top:0;margin-top:0;padding-top:0}
+.item-top{display:flex;align-items:center;gap:3mm;break-after:avoid}
+.item-top .n{width:9mm;font-size:12pt}
+.item-top .bl{font-family:var(--cond);font-weight:700;font-size:9.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--brasa)}
+.item h2{font-family:var(--serif);font-weight:900;font-size:19pt;line-height:1.06;letter-spacing:-.01em;margin:2.5mm 0 1.5mm;break-after:avoid}
+.sub{font-style:italic;color:var(--cinza);font-size:10.8pt;line-height:1.4;margin-bottom:3.5mm;break-after:avoid}
+.resumo{font-size:10.6pt;line-height:1.55;text-align:justify;hyphens:auto}
+.resumo::first-letter{font-weight:900;color:var(--brasa)}
+.metafora{margin:4mm 0 0;padding:3mm 4.5mm 3.2mm;background:var(--tinta);border-left:3pt solid var(--brasa);break-inside:avoid}
+.metafora .box-h{margin:0 0 1mm;color:var(--brasa)}
+.metafora p{font-style:italic;font-size:10.6pt;line-height:1.5}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:6mm;margin-top:4.5mm}
+.col{break-inside:avoid}
+.col .box-h{margin-top:0;border-bottom:1px solid var(--linha);padding-bottom:1.2mm;margin-bottom:1.8mm}
+.col.ang .box-h{color:var(--ambar);border-color:var(--ambar-cl)}
+.col ul{padding-left:4mm;font-size:9.6pt;line-height:1.42}
+.col li{margin-bottom:1.4mm}
+.col li::marker{color:var(--brasa)}
+.perg{margin-top:4.5mm;border:1px solid var(--linha);padding:3mm 4.5mm 3.4mm;break-inside:avoid}
+.perg .box-h{margin:0 0 1.6mm;color:var(--preto)}
+.perg ol{padding-left:5mm;font-size:10pt;line-height:1.42}
+.perg li{margin-bottom:1.2mm}
+.perg li::marker{font-family:var(--cond);font-weight:700;color:var(--brasa)}
+.atencao{margin-top:3mm;font-family:var(--mono);font-size:8pt;color:var(--brasa-esc)}
+.fontes{margin-top:3mm;font-family:var(--mono);font-size:7.3pt;line-height:1.45;color:var(--cinza);break-inside:avoid}
+.fontes b{display:block;font-family:var(--cond);font-weight:700;font-size:8pt;letter-spacing:.16em;text-transform:uppercase;color:var(--preto);margin-bottom:.8mm}
+.fontes ol{margin:0;padding-left:4.5mm}
+.fontes li{margin-bottom:.6mm}
+.fontes .fn{font-weight:500;color:var(--preto)}
+.fontes a{color:var(--brasa-esc);text-decoration:underline;text-decoration-color:var(--ambar-cl);word-break:break-all}
+.selo{display:inline-block;font-family:var(--cond);font-weight:700;font-size:8pt;letter-spacing:.16em;text-transform:uppercase;color:var(--brasa);border:1.2pt solid var(--brasa);padding:0 2mm;margin-left:2mm;line-height:1.5}
+.indice .selo{font-size:7pt;margin-left:2mm}
+.fim{margin-top:10mm;padding-top:4mm;border-top:1px solid var(--linha);font-family:var(--cond);font-weight:600;font-size:8.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--cinza);display:flex;justify-content:space-between;gap:6mm}
+.vazio{padding:20mm 0;text-align:center;font-family:var(--cond);letter-spacing:.12em;text-transform:uppercase;color:var(--cinza)}
+</style>
+</head>
+<body>
+<div class="barra"><button type="button" onclick="window.print()">Imprimir ou salvar em PDF</button><a href="pauta.html">Voltar à pauta</a></div>
+<div class="folha" id="folha"><div class="vazio">Carregando a pauta…</div></div>
+<script>
+(async()=>{
+  const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const MES=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+  const DIA=["domingo","segunda-feira","terça-feira","quarta-feira","quinta-feira","sexta-feira","sábado"];
+  const host=u=>{try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return u}};
+  const pronto=()=>{(document.fonts?document.fonts.ready:Promise.resolve()).then(()=>setTimeout(()=>{window.__pronto=true},300))};
+  try{
+    const q=new URLSearchParams(location.search);let d=q.get("d");
+    if(!d){const ix=await fetch("programa/index.json?"+Date.now()).then(r=>r.json());d=(ix.days||[]).sort().pop()}
+    const p=await fetch(`programa/${d}.json?`+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json()});
+    const C=await fetch("cliente.json?"+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({}));
+    if(C.cor){document.documentElement.style.setProperty("--brasa",C.cor);document.documentElement.style.setProperty("--brasa-esc",C.cor)}
+    const dt=new Date(p.date+"T12:00:00");
+    const dataLonga=`${DIA[dt.getDay()]}, ${dt.getDate()} de ${MES[dt.getMonth()]} de ${dt.getFullYear()}`;
+    const curta=`${String(dt.getDate()).padStart(2,"0")}/${String(dt.getMonth()+1).padStart(2,"0")}`;
+    document.title=`Pauta ${p.programa||C.programa||""} ${curta}`;
+    const itens=p.itens||[];
+    const ind=itens.map((it,i)=>`<li><span class="n">${i+1}</span><span class="bl">${esc(it.bloco)}</span><span class="t">${esc(it.titulo)}${(it.avulsa||it.pedido)?`<span class="selo">Pauta avulsa</span>`:""}</span></li>`).join("");
+    const ag=(p.agenda||[]).length?`<div class="agenda"><div class="box-h">Com hora marcada</div>${p.agenda.map(a=>`<div class="ag"><b>${esc(a.time)}</b><span>${esc(a.text)}</span></div>`).join("")}</div>`:"";
+    const li=a=>(a||[]).map(x=>`<li>${esc(x)}</li>`).join("");
+    const corpo=itens.map((it,i)=>`<section class="item${i===0?" novo":""}">
+      <div class="item-top"><span class="n">${i+1}</span><span class="bl">${esc(it.bloco)}</span>${(it.avulsa||it.pedido)?`<span class="selo">Pauta avulsa</span>`:""}</div>
+      <h2>${esc(it.titulo)}</h2>${it.subtitulo?`<p class="sub">${esc(it.subtitulo)}</p>`:""}
+      <p class="resumo">${esc(it.resumo)}</p>
+      ${it.metafora?`<div class="metafora"><div class="box-h">Para explicar no ar</div><p>${esc(it.metafora)}</p></div>`:""}
+      <div class="cols"><div class="col"><div class="box-h">Contexto</div><ul>${li(it.contexto)}</ul></div><div class="col ang"><div class="box-h">Nosso ângulo</div><ul>${li(it.angulo)}</ul></div></div>
+      ${(it.perguntas||[]).length?`<div class="perg"><div class="box-h">Perguntas para a conversa</div><ol>${li(it.perguntas)}</ol></div>`:""}
+      ${it.atencao?`<p class="atencao">Atenção: ${esc(it.atencao)}</p>`:""}
+      ${(it.fontes||[]).length?`<div class="fontes"><b>Fontes</b><ol>${it.fontes.map(f=>`<li><span class="fn">${esc(f.name)}</span> <a href="${esc(f.url)}">${esc(f.url)}</a></li>`).join("")}</ol></div>`:""}
+    </section>`).join("");
+    const g=new Date(p.generated);
+    document.getElementById("folha").innerHTML=`
+      <header class="mast">${C.logo?`<img src="${esc(C.logo)}" alt="" onerror="this.remove()">`:""}<div><div class="mast-nome">${esc(p.programa||C.programa||"")}</div><div class="mast-sub">Pauta do programa · ${esc(dataLonga)}</div></div></header>
+      <div class="capa"><div class="kick">Os temas do dia</div><h1>${esc(p.titulo||"")}</h1><p class="abertura">${esc(p.abertura||"")}</p></div>
+      <div class="indice"><h3>Neste programa</h3><ol>${ind}</ol></div>${ag}
+      ${corpo}
+      <div class="fim"><span>${esc(C.veiculo||"")}</span><span>Pauta gerada em ${g.toLocaleDateString("pt-BR",{timeZone:"America/Sao_Paulo"})} às ${g.toLocaleTimeString("pt-BR",{timeZone:"America/Sao_Paulo",hour:"2-digit",minute:"2-digit"})} (Brasília)</span></div>`;
+    const img=document.querySelector(".mast img");
+    if(img&&!img.complete)await new Promise(r=>{img.onload=img.onerror=r});
+    pronto();
+  }catch(e){document.getElementById("folha").innerHTML=`<div class="vazio">Pauta não encontrada.</div>`;window.__pronto=true}
+})();
+</script>
+</body>
+</html>

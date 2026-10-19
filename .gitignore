@@ -1,0 +1,7 @@
+dist/
+node_modules/
+.wrangler/
+.dev.vars
+coleta-noticias.*
+noticias/trends.json
+pedido-avulso.json

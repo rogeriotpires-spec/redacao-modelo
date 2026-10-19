@@ -1,0 +1,21 @@
+/* Complementos comuns: menu do usuário, janela de senha, aviso e cabeçalho com a cor do cliente */
+:root{--marca:#0b3d91}
+.hero{background:linear-gradient(135deg,var(--marca) 0%,#0d1b2e 75%)!important}
+.hero::before{display:none!important}
+.hero-in{grid-template-columns:1fr auto!important}
+.umenu{position:relative;margin-left:auto}
+.ubtn{font:600 14px Inter,sans-serif;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer}
+.upop{position:absolute;right:0;top:calc(100% + 6px);min-width:220px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.18);padding:6px;z-index:50;display:flex;flex-direction:column}
+.upop .uhead{padding:8px 10px;border-bottom:1px solid var(--border);margin-bottom:4px;display:flex;flex-direction:column}
+.upop .uhead small{color:var(--muted);font-size:12px}
+.upop a,.upop button{font:500 14px Inter,sans-serif;text-align:left;padding:8px 10px;border-radius:8px;background:none;border:0;color:var(--text);text-decoration:none;cursor:pointer}
+.upop a:hover,.upop button:hover{background:var(--surface-2)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:100;padding:16px}
+.mbox{background:var(--surface);color:var(--text);border-radius:16px;padding:22px;width:100%;max-width:400px;display:flex;flex-direction:column;gap:10px}
+.mbox h3{margin:0;font:700 20px Fraunces,Georgia,serif}
+.mbox label{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:600;color:var(--text-2)}
+.mbox input,.mbox select{font:15px Inter,sans-serif;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text)}
+.merr{color:var(--bad);font-size:13px;min-height:1em;margin:0}
+.mact{display:flex;gap:8px;justify-content:flex-end}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--surface);padding:10px 16px;border-radius:999px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;z-index:120}
+.toast.on{opacity:1;transform:translateX(-50%)}

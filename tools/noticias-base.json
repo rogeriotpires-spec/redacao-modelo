@@ -1,0 +1,430 @@
+{
+ "_doc": "Parâmetros da aba Notícias. Pode editar direto no GitHub: as próximas edições usam os valores novos.",
+ "editions": [
+  "06:00",
+  "12:00",
+  "19:00"
+ ],
+ "criteria": [
+  {
+   "key": "cobertura",
+   "label": "Cobertura cruzada",
+   "weight": 10,
+   "how": "Quantos portais da lista publicaram o mesmo fato. 1 portal = 2; 3 = 5; 6 = 8; 9 ou mais = 10."
+  },
+  {
+   "key": "destaque",
+   "label": "Destaque editorial",
+   "weight": 8,
+   "how": "Posição nas homes: manchete principal = 10; abertura/topo = 8; destaque secundário = 6; só na editoria = 3."
+  },
+  {
+   "key": "persistencia",
+   "label": "Persistência",
+   "weight": 6,
+   "how": "Continua sendo atualizado: novo nesta edição = 4; já estava na edição anterior com desdobramento = 7; atravessa o dia ou mais de 24h com novos fatos = 10."
+  },
+  {
+   "key": "peso_voce",
+   "label": "Peso para você",
+   "weight": 7,
+   "how": "Aderência à linha do @rogerrio e ao que rende no perfil (STF, corrupção, economia no bolso, eleição, segurança, Rio, imprensa, educação e inovação, que são áreas em que ele atua): forte = 10; média = 6; fraca = 3."
+  }
+ ],
+ "score_formula": "nota final = soma(nota do critério x peso) / soma dos pesos, de 0 a 10",
+ "summary_lines": 5,
+ "items_per_segment": 5,
+ "top_overall": 5,
+ "min_outlets": 2,
+ "asymmetry": {
+  "enabled": true,
+  "rule": "Selo quando o fato tem destaque em um campo editorial (direita ou centro-esquerda/esquerda) e está ausente ou sem destaque no outro, considerando pelo menos 3 portais de cada campo."
+ },
+ "segments": [
+  {
+   "key": "politica",
+   "label": "Política nacional",
+   "min_items": 1
+  },
+  {
+   "key": "economia",
+   "label": "Economia",
+   "min_items": 1
+  },
+  {
+   "key": "internacional",
+   "label": "Internacional",
+   "note": "Política e economia internacional",
+   "min_items": 1
+  },
+  {
+   "key": "seguranca",
+   "label": "Segurança pública",
+   "min_items": 1
+  },
+  {
+   "key": "educacao",
+   "label": "Educação",
+   "note": "Educação básica, técnica e superior: MEC, Enem, Fies, Prouni, universidades e institutos federais, UERJ, UENF, FAETEC, CECIERJ/CEDERJ, redes estaduais e municipais, professores, greves, resultados de avaliações (Saeb, Ideb, Pisa)",
+   "min_items": 2,
+   "min_outlets": 1
+  },
+  {
+   "key": "rio",
+   "label": "Rio de Janeiro",
+   "note": "Estado e cidade do Rio de Janeiro: governo do estado, Alerj, Prefeitura do Rio, Câmara do Rio, segurança no RJ, transporte, economia fluminense, Baixada, Niterói, interior",
+   "min_items": 3,
+   "min_outlets": 1
+  },
+  {
+   "key": "ciencia",
+   "label": "Ciência e tecnologia",
+   "note": "Ciência, pesquisa, inovação, startups, inteligência artificial, big techs e regulação digital, saúde e medicina, espaço, CNPq, Capes, Finep, FAPERJ",
+   "min_items": 2,
+   "min_outlets": 1
+  },
+  {
+   "key": "esportes",
+   "label": "Esportes",
+   "note": "Futebol (clubes do Rio em destaque: Flamengo, Fluminense, Vasco, Botafogo), Seleção, outros esportes e a política do esporte (CBF, bets, estádios)",
+   "min_items": 2,
+   "min_outlets": 1
+  }
+ ],
+ "outlets": [
+  {
+   "name": "G1",
+   "url": "https://g1.globo.com",
+   "camp": "centro",
+   "fetch": false,
+   "note": "O G1 bloqueia leitura automática. Entra quando aparece na busca ou é citado por outro portal; a ausência dele não conta para a nota nem para a assimetria.",
+   "tier": 1
+  },
+  {
+   "name": "O Globo",
+   "url": "https://oglobo.globo.com",
+   "camp": "centro",
+   "tier": 1
+  },
+  {
+   "name": "Folha de S.Paulo",
+   "url": "https://www.folha.uol.com.br",
+   "camp": "centro-esquerda",
+   "tier": 1
+  },
+  {
+   "name": "Estadão",
+   "url": "https://www.estadao.com.br",
+   "camp": "centro",
+   "tier": 1
+  },
+  {
+   "name": "UOL",
+   "url": "https://noticias.uol.com.br",
+   "camp": "centro-esquerda",
+   "tier": 1
+  },
+  {
+   "name": "CNN Brasil",
+   "url": "https://www.cnnbrasil.com.br",
+   "camp": "centro",
+   "tier": 1
+  },
+  {
+   "name": "Poder360",
+   "url": "https://www.poder360.com.br",
+   "camp": "centro",
+   "tier": 1
+  },
+  {
+   "name": "Metrópoles",
+   "url": "https://www.metropoles.com",
+   "camp": "centro",
+   "tier": 1
+  },
+  {
+   "name": "Valor Econômico",
+   "url": "https://valor.globo.com",
+   "camp": "centro",
+   "tier": 2
+  },
+  {
+   "name": "InfoMoney",
+   "url": "https://www.infomoney.com.br",
+   "camp": "centro",
+   "tier": 2
+  },
+  {
+   "name": "Agência Brasil",
+   "url": "https://agenciabrasil.ebc.com.br",
+   "camp": "estatal",
+   "tier": 2
+  },
+  {
+   "name": "CartaCapital",
+   "url": "https://www.cartacapital.com.br",
+   "camp": "esquerda",
+   "tier": 2
+  },
+  {
+   "name": "Brasil 247",
+   "url": "https://www.brasil247.com",
+   "camp": "esquerda",
+   "tier": 2
+  },
+  {
+   "name": "ICL Notícias",
+   "url": "https://iclnoticias.com.br",
+   "camp": "esquerda",
+   "tier": 2
+  },
+  {
+   "name": "Gazeta do Povo",
+   "url": "https://www.gazetadopovo.com.br",
+   "camp": "direita",
+   "tier": 1
+  },
+  {
+   "name": "Revista Oeste",
+   "url": "https://revistaoeste.com",
+   "camp": "direita",
+   "tier": 1
+  },
+  {
+   "name": "Jovem Pan",
+   "url": "https://jovempan.com.br",
+   "camp": "direita",
+   "tier": 1
+  },
+  {
+   "name": "Pleno.News",
+   "url": "https://pleno.news",
+   "camp": "direita",
+   "tier": 2
+  },
+  {
+   "name": "Diário do Poder",
+   "url": "https://diariodopoder.com.br",
+   "camp": "direita",
+   "tier": 2
+  },
+  {
+   "name": "O Antagonista",
+   "url": "https://oantagonista.com.br",
+   "camp": "centro-direita",
+   "tier": 2
+  },
+  {
+   "name": "BBC News Brasil",
+   "url": "https://www.bbc.com/portuguese",
+   "camp": "internacional",
+   "tier": 2
+  },
+  {
+   "name": "DW Brasil",
+   "url": "https://www.dw.com/pt-br",
+   "camp": "internacional",
+   "tier": 2
+  },
+  {
+   "name": "Reuters",
+   "url": "https://www.reuters.com",
+   "camp": "internacional",
+   "tier": 2
+  },
+  {
+   "name": "AP News",
+   "url": "https://apnews.com",
+   "camp": "internacional",
+   "tier": 2
+  },
+  {
+   "name": "R7",
+   "url": "https://noticias.r7.com",
+   "camp": "centro",
+   "tier": 1
+  },
+  {
+   "name": "Terra",
+   "url": "https://www.terra.com.br/noticias/",
+   "camp": "centro",
+   "tier": 1
+  },
+  {
+   "name": "SBT News",
+   "url": "https://sbtnews.sbt.com.br",
+   "camp": "centro",
+   "tier": 2
+  },
+  {
+   "name": "BandNews",
+   "url": "https://www.band.com.br/noticias",
+   "camp": "centro",
+   "tier": 2
+  },
+  {
+   "name": "Correio Braziliense",
+   "url": "https://www.correiobraziliense.com.br",
+   "camp": "centro",
+   "tier": 2
+  },
+  {
+   "name": "Super Notícia",
+   "url": "https://www.otempo.com.br/super-noticia",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "Zero Hora (GZH)",
+   "url": "https://gauchazh.clicrbs.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "Estado de Minas",
+   "url": "https://www.em.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "Yahoo Notícias",
+   "url": "https://br.noticias.yahoo.com",
+   "camp": "centro",
+   "tier": 3
+  },
+  {
+   "name": "MSN Notícias",
+   "url": "https://www.msn.com/pt-br/noticias",
+   "camp": "centro",
+   "tier": 3
+  },
+  {
+   "name": "Exame",
+   "url": "https://exame.com",
+   "camp": "centro",
+   "tier": 2
+  },
+  {
+   "name": "Veja",
+   "url": "https://veja.abril.com.br",
+   "camp": "centro",
+   "tier": 2
+  },
+  {
+   "name": "O Tempo",
+   "url": "https://www.otempo.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "Diário do Nordeste",
+   "url": "https://diariodonordeste.verdesmares.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "A Tarde",
+   "url": "https://atarde.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "Jornal do Commercio",
+   "url": "https://jc.uol.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "O Povo",
+   "url": "https://www.opovo.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "ND Mais",
+   "url": "https://ndmais.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "Correio do Povo",
+   "url": "https://www.correiodopovo.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "Gazeta de Alagoas",
+   "url": "https://www.gazetaweb.com",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "Diário de Pernambuco",
+   "url": "https://www.diariodepernambuco.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "BHAZ",
+   "url": "https://bhaz.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "NSC Total",
+   "url": "https://www.nsctotal.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "Correio (Bahia)",
+   "url": "https://www.correio24horas.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "Tribuna do Norte",
+   "url": "https://www.tribunadonorte.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "Folha de Londrina",
+   "url": "https://www.folhadelondrina.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
+   "name": "JOTA",
+   "url": "https://www.jota.info",
+   "camp": "centro",
+   "tier": 2
+  },
+  {
+   "name": "Congresso em Foco",
+   "url": "https://congressoemfoco.uol.com.br",
+   "camp": "centro",
+   "tier": 2
+  },
+  {
+   "name": "Portal iG",
+   "url": "https://ultimosegundo.ig.com.br",
+   "camp": "centro",
+   "tier": 3
+  },
+  {
+   "name": "CBN",
+   "url": "https://cbn.globo.com",
+   "camp": "centro",
+   "tier": 2
+  },
+  {
+   "name": "O Popular",
+   "url": "https://opopular.com.br",
+   "camp": "regional",
+   "tier": 3
+  }
+ ],
+ "_doc_tiers": "tier 1: abrir a home em toda edição; tier 2: abrir a home ou buscar por site em toda edição; tier 3 (regionais e agregadores): buscar por site (WebSearch site:dominio) os fatos do dia e abrir só quando houver matéria relevante, sobretudo fatos do estado do veículo.",
+ "_doc_segments": "Cada bloco tem min_items: a edição precisa ter pelo menos essa quantidade de notícias no bloco quando houver fato no período, mesmo que a nota seja menor que a de outros blocos. min_outlets do bloco substitui o mínimo geral de portais."
+}

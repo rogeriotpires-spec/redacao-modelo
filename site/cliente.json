@@ -1,0 +1,27 @@
+{
+ "produto": "Redação Inteligente",
+ "cliente": "Demonstração",
+ "veiculo": "Rádio Demonstração",
+ "programa": "Jornal da Manhã",
+ "apresentadores": [
+  "Apresentador 1",
+  "Apresentador 2"
+ ],
+ "horario": "07:00",
+ "dias": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "gera_pauta_as": "05:30",
+ "virada_hora": 14,
+ "edicoes": [
+  "06h",
+  "12h",
+  "19h"
+ ],
+ "cor": "#0b3d91",
+ "logo": "marca/logo.png"
+}

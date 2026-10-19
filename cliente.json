@@ -1,0 +1,49 @@
+{
+  "_doc": "Configuração do cliente. Depois de editar, rode python3 tools/configurar.py e faça commit de tudo (ele atualiza fontes, horários e as agendas dos workflows).",
+  "produto": "Redação Inteligente",
+  "cliente": "Demonstração",
+  "veiculo": "Rádio Demonstração",
+  "programa": {
+    "nome": "Jornal da Manhã",
+    "apresentadores": ["Apresentador 1", "Apresentador 2"],
+    "dias": [1, 2, 3, 4, 5],
+    "horario": "07:00",
+    "gera_pauta_as": "05:30",
+    "virada_hora": 14,
+    "itens": 6,
+    "linhas_resumo": 5,
+    "perguntas_por_item": 3,
+    "metafora_percentual": 25,
+    "blocos": ["Política nacional", "STF e instituições", "Economia", "Segurança pública", "Região", "Internacional", "Educação"]
+  },
+  "linha_editorial": "Visão de direita e conservadora: defesa da liberdade de expressão, do Estado de Direito, da responsabilidade fiscal, da segurança pública, da família e dos limites do poder do Judiciário. Fatos sempre verificáveis; opinião sempre identificada como análise.",
+  "temas_prioritarios": ["política nacional", "STF e TSE", "eleição", "economia no bolso", "segurança pública", "corrupção", "imprensa", "a região de cobertura"],
+  "fontes_da_linha": ["Gazeta do Povo", "Revista Oeste", "Jovem Pan", "O Antagonista", "Diário do Poder", "Pleno.News"],
+  "voz": [
+    "Fontes ficam no campo de fontes; no texto, no máximo uma atribuição a veículo, e só quando ajuda o argumento ou protege juridicamente.",
+    "A grande mídia tradicional serve para conferir fatos e números, nunca para dar o enquadramento.",
+    "Nunca afirmar crime sem condenação: usar investigado, denunciado, segundo a PF.",
+    "Títulos diretos, no estilo da manchete dos portais, com sujeito e verbo.",
+    "Português do Brasil, frases curtas, sem travessão."
+  ],
+  "regiao": {
+    "nome": "Minas Gerais",
+    "rotulo_bloco": "Minas Gerais",
+    "buscas": ["\"governo de Minas\" OR Zema OR ALMG OR \"Assembleia de Minas\"", "\"Prefeitura de Belo Horizonte\" OR \"Câmara de BH\" OR \"Belo Horizonte\"", "\"Minas Gerais\" polícia OR operação OR segurança", "Contagem OR Betim OR \"Juiz de Fora\" OR Uberlândia"],
+    "portais": [
+      {"name": "O Tempo", "url": "https://www.otempo.com.br", "camp": "regional", "tier": 2},
+      {"name": "Estado de Minas", "url": "https://www.em.com.br", "camp": "regional", "tier": 2},
+      {"name": "Itatiaia", "url": "https://www.itatiaia.com.br", "camp": "regional", "tier": 2},
+      {"name": "Hoje em Dia", "url": "https://www.hojeemdia.com.br", "camp": "regional", "tier": 3}
+    ]
+  },
+  "esportes_buscas": ["Atlético-MG OR Cruzeiro OR América-MG", "seleção brasileira OR CBF OR Brasileirão", "esporte olímpico OR vôlei OR Fórmula 1 OR tênis"],
+  "noticias": {
+    "edicoes": ["06h", "12h", "19h"],
+    "cron_utc": "0 8,14,21 * * *"
+  },
+  "marca": {
+    "cor": "#0b3d91",
+    "logo": "marca/logo.png"
+  }
+}

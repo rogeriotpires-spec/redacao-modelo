@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Usuários</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#f3f2ee;--surface:#fcfcfb;--surface-2:#f6f5f1;--border:#e3e1da;--text:#0b0b0b;--text-2:#52514e;--muted:#85847e;--good:#0f7a4c;--good-bg:#e5f4ec;--warn:#9a5b00;--warn-bg:#fbf0dc;--bad:#b4302f;--bad-bg:#fbe6e5;--s1:#2a78d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#111110;--surface:#1a1a19;--surface-2:#222220;--border:#2f2f2c;--text:#fff;--text-2:#c3c2b7;--muted:#8f8e86;--good:#4cc28a;--good-bg:#16291f;--warn:#e3a43c;--warn-bg:#2d2414;--bad:#ef7b7a;--bad-bg:#311a1a;--s1:#3987e5}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#111110;--surface:#1a1a19;--surface-2:#222220;--border:#2f2f2c;--text:#fff;--text-2:#c3c2b7;--muted:#8f8e86;--good:#4cc28a;--good-bg:#16291f;--warn:#e3a43c;--warn-bg:#2d2414;--bad:#ef7b7a;--bad-bg:#311a1a;--s1:#3987e5}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif}
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:980px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.tabs{display:flex;gap:4px;align-items:center;width:100%;flex-wrap:wrap}.tabs a{padding:7px 12px;border-radius:999px;text-decoration:none;color:var(--text-2);font-weight:600;font-size:14px}.tabs a.on{background:var(--text);color:var(--surface)}
+main{max-width:980px;margin:0 auto;padding:22px 16px 60px}
+h1{font:700 30px/1.1 Fraunces,Georgia,serif;margin:0 0 4px}.sub{color:var(--text-2);margin:0 0 20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:16px}
+.card h2{font-size:16px;margin:0 0 12px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:10px;align-items:end}
+@media (max-width:760px){.grid{grid-template-columns:1fr 1fr}.grid .btn{grid-column:1/-1}}
+label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:600;color:var(--text-2)}
+input,select{font:15px Inter,sans-serif;padding:9px 11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text);min-width:0}
+.btn{font:700 14px Inter,sans-serif;padding:10px 14px;border:0;border-radius:10px;background:var(--text);color:var(--surface);cursor:pointer}
+.btn.ghost{background:var(--surface);color:var(--text);border:1px solid var(--border)}.btn.sm{padding:6px 10px;font-size:12.5px;font-weight:600}
+.btn.danger{background:var(--bad-bg);color:var(--bad)}
+.msg{font-size:13px;margin:10px 0 0;min-height:1em}.msg.ok{color:var(--good)}.msg.err{color:var(--bad)}
+table{width:100%;border-collapse:collapse;font-size:14px}th{text-align:left;font-size:12px;color:var(--muted);font-weight:600;padding:8px;border-bottom:1px solid var(--border)}
+td{padding:10px 8px;border-bottom:1px solid var(--border);vertical-align:middle}td .acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.pill{font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;white-space:nowrap}.pill.good{background:var(--good-bg);color:var(--good)}.pill.bad{background:var(--bad-bg);color:var(--bad)}.pill.neutral{background:var(--surface-2);color:var(--text-2)}
+.small{font-size:12px;color:var(--muted)}
+@media (max-width:760px){thead{display:none}tr{display:block;padding:10px 0;border-bottom:1px solid var(--border)}td{display:block;border:0;padding:3px 0}td .acts{justify-content:flex-start;margin-top:6px}}
+</style>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<nav><div class="nav-in"><div class="tabs"><a href="/">Notícias</a><a href="pauta.html">Pauta do programa</a><a href="admin.html" class="on" aria-current="page">Usuários</a></div></div></nav>
+<main>
+  <h1>Usuários</h1>
+  <p class="sub">Quem pode entrar no painel de <span data-cli="veiculo"></span>. Administradores também gerenciam esta lista.</p>
+  <form class="card" id="novo" autocomplete="off">
+    <h2>Novo usuário</h2>
+    <div class="grid">
+      <label>Nome<input name="nome" required maxlength="80"></label>
+      <label>Usuário (login)<input name="login" required pattern="[a-z0-9._\-]{3,40}" title="3 a 40 letras minúsculas, números, ponto, hífen ou sublinhado" autocapitalize="none"></label>
+      <label>Senha provisória<input name="senha" required minlength="8" autocomplete="new-password"></label>
+      <label>Papel<select name="papel"><option value="redacao">Redação</option><option value="admin">Administrador</option></select></label>
+      <button class="btn">Criar</button>
+    </div>
+    <p class="small">A pessoa troca a senha provisória no primeiro acesso.</p>
+    <p class="msg" id="m1" role="status"></p>
+  </form>
+  <div class="card"><h2>Usuários cadastrados</h2><table><thead><tr><th>Nome</th><th>Usuário</th><th>Papel</th><th>Situação</th><th>Último acesso</th><th></th></tr></thead><tbody id="lista"><tr><td colspan="6">Carregando…</td></tr></tbody></table><p class="msg" id="m2" role="status"></p></div>
+</main>
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+<script>
+const $=s=>document.querySelector(s),esc=Painel.esc;
+const api=(body)=>fetch("/api/usuarios",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(async r=>{const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||"Erro "+r.status);return j});
+const quando=s=>s?new Date(s).toLocaleString("pt-BR",{timeZone:"America/Sao_Paulo",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"nunca";
+async function carrega(){
+  const j=await fetch("/api/usuarios",{cache:"no-store"}).then(r=>r.json());const eu=Painel.usuario||{};
+  $("#lista").innerHTML=(j.usuarios||[]).map(u=>`<tr><td><b>${esc(u.nome)}</b></td><td>${esc(u.login)}</td><td><span class="pill neutral">${u.papel==="admin"?"Administrador":"Redação"}</span></td><td><span class="pill ${u.ativo?"good":"bad"}">${u.ativo?"Ativo":"Bloqueado"}</span></td><td class="small">${quando(u.ultimo_acesso)}</td>
+    <td><div class="acts"><button class="btn ghost sm" data-a="senha" data-l="${esc(u.login)}">Nova senha</button><button class="btn ghost sm" data-a="${u.ativo?"bloquear":"desbloquear"}" data-l="${esc(u.login)}">${u.ativo?"Bloquear":"Desbloquear"}</button><button class="btn ghost sm" data-a="papel" data-p="${u.papel==="admin"?"redacao":"admin"}" data-l="${esc(u.login)}">${u.papel==="admin"?"Tornar redação":"Tornar admin"}</button>${u.login!==eu.login?`<button class="btn danger sm" data-a="remover" data-l="${esc(u.login)}">Remover</button>`:""}</div></td></tr>`).join("")||`<tr><td colspan="6">Nenhum usuário.</td></tr>`;
+}
+$("#novo").onsubmit=async e=>{e.preventDefault();const f=e.target,m=$("#m1");m.className="msg";m.textContent="";
+  try{await api({acao:"criar",nome:f.nome.value.trim(),login:f.login.value.trim().toLowerCase(),senha:f.senha.value,papel:f.papel.value});m.className="msg ok";m.textContent=`Usuário ${f.login.value} criado. Envie a ele o endereço do painel, o usuário e a senha provisória.`;f.reset();carrega()}
+  catch(err){m.className="msg err";m.textContent=err.message}};
+document.addEventListener("click",async e=>{const b=e.target.closest("button[data-a]");if(!b)return;const a=b.dataset.a,l=b.dataset.l,m=$("#m2");m.className="msg";m.textContent="";
+  const body={acao:a,login:l};
+  if(a==="senha"){const s=prompt(`Nova senha provisória para ${l} (mínimo 8 caracteres):`);if(!s)return;body.senha=s}
+  if(a==="remover"&&!confirm(`Remover ${l}? A pessoa perde o acesso na hora.`))return;
+  if(a==="bloquear"&&!confirm(`Bloquear ${l}? A pessoa perde o acesso na hora, e você pode desbloquear depois.`))return;
+  if(a==="papel")body.papel=b.dataset.p;
+  try{await api(body);m.className="msg ok";m.textContent=a==="senha"?`Senha de ${l} trocada. A pessoa cria uma nova no próximo acesso.`:"Feito.";carrega()}catch(err){m.className="msg err";m.textContent=err.message}});
+Painel.pronto.then(carrega);
+</script>
+</body>
+</html>
