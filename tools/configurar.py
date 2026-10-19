@@ -28,7 +28,9 @@ for cr in n["criteria"]:
     if cr["key"] == "peso_voce":
         cr["label"] = f"Peso para {C['veiculo']}"
         cr["how"] = f"Aderência à linha editorial de {C['veiculo']} e aos temas prioritários ({', '.join(C['temas_prioritarios'])}): forte = 10; média = 6; fraca = 3."
-n["editions"] = [e.replace("h", ":00") for e in C["noticias"]["edicoes"]]
+HORAS = sorted({int(str(e).rstrip("h").split(":")[0]) for e in C["noticias"]["edicoes"]})
+EDICOES = [f"{h:02d}h" for h in HORAS]
+n["editions"] = [f"{h:02d}:00" for h in HORAS]
 os.makedirs("noticias", exist_ok=True)
 json.dump(n, open("noticias/config.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
@@ -45,9 +47,14 @@ for f, k in (("noticias/index.json", "editions"), ("programa/index.json", "days"
 
 # ---------- o que as páginas mostram ----------
 os.makedirs("site", exist_ok=True)
+import hashlib
+M = C.get("marca", {})
+cores = M.get("cores") or {"primaria": M.get("cor", "#0b3d91")}
+logo = M.get("logo") if M.get("logo") and os.path.exists(M["logo"]) else None
+versao = hashlib.sha1(json.dumps(C, sort_keys=True).encode() + (open(logo, "rb").read() if logo else b"")).hexdigest()[:10]
 json.dump({"produto": C["produto"], "cliente": C["cliente"], "veiculo": C["veiculo"], "programa": P["nome"],
            "apresentadores": P["apresentadores"], "horario": P["horario"], "dias": P["dias"], "gera_pauta_as": P["gera_pauta_as"], "virada_hora": P["virada_hora"],
-           "edicoes": C["noticias"]["edicoes"], "cor": C["marca"]["cor"], "logo": C["marca"].get("logo")},
+           "edicoes": EDICOES, "cor": cores.get("primaria"), "cores": cores, "logo": logo, "versao": versao},
           open("site/cliente.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
 # ---------- horários das rotinas (cron em UTC; Brasília = UTC-3) ----------
@@ -60,5 +67,6 @@ def troca(arq, novo):
     s2 = re.sub(r'- cron: "[^"]*"(\s*#[^\n]*)?', f'- cron: "{novo}"', s, count=1)
     open(p, "w", encoding="utf-8").write(s2)
 troca("programa.yml", f"{m} {hu} * * {dias}")
-troca("noticias.yml", C["noticias"]["cron_utc"])
-print(f"ok: {C['cliente']} · {len(n['outlets'])} portais · pauta {P['nome']} às {P['gera_pauta_as']} (dias {dias}) · notícias {C['noticias']['edicoes']}")
+# a rotina de notícias começa 1 hora antes do horário da edição (leva de 20 a 40 minutos)
+troca("noticias.yml", "0 " + ",".join(str((h - 1 + 3) % 24) for h in HORAS) + " * * *")
+print(f"ok: {C['cliente']} · {len(n['outlets'])} portais · pauta {P['nome']} às {P['gera_pauta_as']} (dias {dias}) · notícias {EDICOES}")

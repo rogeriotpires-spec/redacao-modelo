@@ -37,7 +37,7 @@ a{color:inherit;text-decoration:none}
 /* cabeçalho */
 .mast{background:var(--preto);color:#fff;margin:0 -17mm;padding:13mm 17mm 9mm;display:flex;gap:7mm;align-items:center;position:relative;overflow:hidden}
 .mast::after{content:"";position:absolute;inset:auto 0 0 0;height:2.2mm;background:linear-gradient(90deg,var(--brasa),var(--ambar) 55%,var(--ambar-cl))}
-.mast img{width:25mm;height:auto;display:block;flex:none}
+.mast img{width:25mm;height:auto;display:block;flex:none;background:#fff;padding:2mm;border-radius:2mm}
 .mast-nome{font-family:var(--mast);font-weight:700;font-size:29pt;letter-spacing:.07em;line-height:.9;text-transform:uppercase}
 .mast-sub{font-family:var(--cond);font-weight:600;font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:#d8c9bd;border-top:2px solid var(--brasa);padding-top:2.2mm;margin-top:2.6mm}
 .capa{padding:9mm 0 2mm}
@@ -110,7 +110,8 @@ a{color:inherit;text-decoration:none}
     if(!d){const ix=await fetch("programa/index.json?"+Date.now()).then(r=>r.json());d=(ix.days||[]).sort().pop()}
     const p=await fetch(`programa/${d}.json?`+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json()});
     const C=await fetch("cliente.json?"+Date.now()).then(r=>r.ok?r.json():{}).catch(()=>({}));
-    if(C.cor){document.documentElement.style.setProperty("--brasa",C.cor);document.documentElement.style.setProperty("--brasa-esc",C.cor)}
+    {const k=C.cores||(C.cor?{acento:C.cor,primaria:C.cor}:null),R=document.documentElement.style;
+     if(k){if(k.acento)R.setProperty("--brasa",k.acento);if(k.acento)R.setProperty("--brasa-esc",k.escura||k.acento);if(k.primaria)R.setProperty("--ambar",k.primaria);if(k.destaque)R.setProperty("--ambar-cl",k.destaque);if(k.escura)R.setProperty("--preto",k.escura)}}
     const dt=new Date(p.date+"T12:00:00");
     const dataLonga=`${DIA[dt.getDay()]}, ${dt.getDate()} de ${MES[dt.getMonth()]} de ${dt.getFullYear()}`;
     const curta=`${String(dt.getDate()).padStart(2,"0")}/${String(dt.getMonth()+1).padStart(2,"0")}`;

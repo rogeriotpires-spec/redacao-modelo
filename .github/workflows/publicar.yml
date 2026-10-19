@@ -3,6 +3,8 @@ name: Publicar o site
 on:
   push:
     branches: [main]
+    # cliente.json e o logo passam antes por "Aplicar configurações", que grava e dispara esta publicação
+    paths-ignore: ["cliente.json", "marca/**"]
   workflow_dispatch:
 
 permissions:

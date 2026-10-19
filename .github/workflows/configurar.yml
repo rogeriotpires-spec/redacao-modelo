@@ -1,0 +1,47 @@
+name: Aplicar configurações
+
+# Roda quando o administrador salva a tela de Configurações (ou quando cliente.json muda no repositório).
+# Recalcula fontes, blocos, horários das rotinas e a aparência, e publica o painel.
+on:
+  push:
+    branches: [main]
+    paths: ["cliente.json", "marca/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: configurar
+  cancel-in-progress: false
+
+jobs:
+  aplicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # GH_PAT: o mesmo token guardado na Cloudflare (precisa de Contents e Workflows: Read and write),
+      # porque esta rotina altera os horários dentro dos próprios workflows.
+      - name: Conferir o token
+        id: pat
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          if [ -z "$GH_PAT" ]; then echo "::warning::Falta o segredo GH_PAT; configurações não aplicadas."; echo "ok=nao" >> $GITHUB_OUTPUT; else echo "ok=sim" >> $GITHUB_OUTPUT; fi
+      - uses: actions/checkout@v4
+        if: steps.pat.outputs.ok == 'sim'
+        with:
+          token: ${{ secrets.GH_PAT }}
+      - name: Recalcular a configuração
+        if: steps.pat.outputs.ok == 'sim'
+        run: python3 tools/configurar.py
+      - name: Gravar
+        if: steps.pat.outputs.ok == 'sim'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A noticias programa site .github/workflows
+          if git diff --cached --quiet; then echo "Nada mudou."; exit 0; fi
+          git commit -qm "Configurações aplicadas"
+          for i in 1 2 3; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
+          exit 1

@@ -1,7 +1,7 @@
 // Ações da redação: dispara as rotinas no GitHub do cliente com o token guardado na Cloudflare (nunca no navegador).
 import { json } from "../../lib/auth.js";
 const JOBS = { noticias: "noticias.yml", programa: "programa.yml", avulso: "programa-avulso.yml", excluir: "pauta-excluir.yml" };
-const gh = (env, path, init = {}) => fetch(`https://api.github.com/repos/${env.GH_REPO}${path}`, { ...init, headers: { Authorization: `Bearer ${env.GH_TOKEN}`, Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "redacao-inteligente", "Content-Type": "application/json" } });
+const gh = (env, path, init = {}) => fetch(`${env.GH_API || "https://api.github.com"}/repos/${env.GH_REPO}${path}`, { ...init, headers: { Authorization: `Bearer ${env.GH_TOKEN}`, Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "redacao-inteligente", "Content-Type": "application/json" } });
 export async function onRequestPost({ request, env, data }) {
   const b = await request.json().catch(() => ({})), wf = JOBS[b.job];
   if (!wf) return json({ error: "Ação desconhecida." }, 400);

@@ -69,7 +69,7 @@ window.Painel = (() => {
     const w = document.createElement("div"); w.className = "umenu";
     w.innerHTML = `<button type="button" class="ubtn" aria-haspopup="true">${esc(EU.nome.split(" ")[0])} ▾</button>
       <div class="upop" hidden><div class="uhead"><b>${esc(EU.nome)}</b><small>${esc(EU.login)} · ${EU.papel === "admin" ? "administrador" : "redação"}</small></div>
-      ${EU.papel === "admin" ? `<a href="/admin.html">Usuários</a>` : ""}<button type="button" data-u="senha">Trocar senha</button><button type="button" data-u="sair">Sair</button></div>`;
+      ${EU.papel === "admin" ? `<a href="/configuracoes.html">Configurações</a><a href="/admin.html">Usuários</a>` : ""}<button type="button" data-u="senha">Trocar senha</button><button type="button" data-u="sair">Sair</button></div>`;
     host.appendChild(w);
     const pop = w.querySelector(".upop");
     w.querySelector(".ubtn").onclick = e => { e.stopPropagation(); pop.hidden = !pop.hidden };
@@ -99,10 +99,13 @@ window.Painel = (() => {
 
   const pronto = (async () => {
     [CLI, EU] = await Promise.all([fetch("/cliente.json", { cache: "no-store" }).then(r => r.json()).catch(() => ({})), req("/api/me").catch(() => null)]);
-    if (CLI.cor) document.documentElement.style.setProperty("--marca", CLI.cor);
+    const k = CLI.cores || (CLI.cor ? { primaria: CLI.cor } : null), R = document.documentElement.style;
+    if (k) { const v = { "--marca": k.primaria, "--marca-esc": k.escura, "--acento": k.acento, "--destaque": k.destaque, "--sobre-destaque": k.sobre_destaque }; for (const n in v) if (v[n]) R.setProperty(n, v[n]) }
     document.querySelectorAll("[data-cli]").forEach(el => { const k = el.dataset.cli; if (CLI[k] != null) el.textContent = Array.isArray(CLI[k]) ? CLI[k].join(", ") : CLI[k] });
     if (document.readyState === "loading") await new Promise(r => document.addEventListener("DOMContentLoaded", r));
     menu();
+    const who = document.querySelector(".hero .who");
+    if (CLI.logo && who && !who.querySelector(".hlogo")) { const im = new Image(); im.className = "hlogo"; im.alt = CLI.veiculo || ""; im.src = "/" + CLI.logo.replace(/^\//, "") + "?v=" + (CLI.versao || ""); im.onerror = () => im.remove(); who.prepend(im) }
     if (EU && EU.troca_senha) trocaSenha(true);
     return { cliente: CLI, usuario: EU };
   })();

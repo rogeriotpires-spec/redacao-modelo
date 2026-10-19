@@ -11,6 +11,7 @@ Cada cliente tem a sua própria cópia deste repositório (privada), o seu site 
 | `programa.yml` | GitHub Actions, em `programa.gera_pauta_as` nos dias do programa | Gera a pauta do dia e o PDF, publica |
 | `programa-avulso.yml` | Disparado pelo painel | Inclui um item pedido pela redação na pauta |
 | `pauta-excluir.yml` | Disparado pelo painel | Tira um item da pauta (e ele não volta) |
+| `configurar.yml` | Quando o administrador salva as Configurações | Recalcula fontes, blocos, horários e cores, e publica |
 | `publicar.yml` | A cada push | Monta `dist/` e publica na Cloudflare Pages |
 | `functions/` | Cloudflare Pages | Porteiro (login), usuários, disparo das rotinas |
 
@@ -21,25 +22,27 @@ Senhas ficam com PBKDF2 no KV; a sessão é um cookie assinado, HttpOnly, de 14 
 
 > Chaves e tokens vão **direto** nas telas de segredos do GitHub e da Cloudflare. Nunca em chat, e-mail ou print.
 
-1. **Repositório privado.** Crie `redacao-<cliente>` como privado e envie este modelo para ele.
-2. **Configuração.** Edite `cliente.json` (veículo, programa, horários, apresentadores, blocos, linha editorial, região e portais regionais, buscas de esporte, cor e logo em `marca/logo.png`). Rode `python3 tools/configurar.py` e faça commit.
-3. **Cloudflare** (conta do cliente ou a sua):
-   - Workers & Pages → Create → Pages → *Upload assets* → nome do projeto, por exemplo `redacao-jpbh`. Publique qualquer pasta só para criar o projeto.
+1. **Repositório privado.** Crie `redacao-<cliente>` como privado a partir deste modelo.
+2. **Token do GitHub** (um por cliente): *fine-grained*, só para o repositório do cliente, com **Actions**, **Contents** e **Workflows** em *Read and write*. Ele é guardado em dois lugares: na Cloudflare (`GH_TOKEN`) e no GitHub (`GH_PAT`).
+3. **Cloudflare:**
+   - Workers & Pages → Create → Pages → *Upload assets* → nome do projeto, por exemplo `redacao-timeline`. Publique qualquer pasta só para criar o projeto.
    - Workers & Pages → KV → crie o namespace `usuarios-<cliente>`.
    - No projeto Pages → Settings → Bindings → **KV namespace**: nome da variável `USUARIOS`, escolha o namespace.
    - No projeto Pages → Settings → Variables and Secrets (tipo **Secret**):
      - `SESSION_SECRET`: um texto aleatório longo (por exemplo, `openssl rand -base64 48`).
      - `SETUP_TOKEN`: uma senha de uso único para criar o primeiro administrador.
-     - `GH_TOKEN`: token *fine-grained* do GitHub, só para o repositório do cliente, permissão **Actions: Read and write**.
+     - `GH_TOKEN`: o token do passo 2.
      - `GH_REPO`: `dono/redacao-<cliente>`.
-   - Crie um token da API da Cloudflare com o modelo *Edit Cloudflare Workers* (ou permissão **Cloudflare Pages: Edit**).
+   - Crie um token da API da Cloudflare com permissão **Cloudflare Pages: Edit**.
 4. **GitHub** → Settings → Secrets and variables → Actions:
-   - Secrets: `ANTHROPIC_API_KEY` (chave do workspace do cliente no console da Anthropic, com limite de gasto), `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
+   - Secrets: `ANTHROPIC_API_KEY` (workspace do cliente no console da Anthropic, com limite de gasto), `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `GH_PAT` (o token do passo 2).
    - Variables: `CF_PROJECT` = nome do projeto Pages.
-5. **Primeira publicação.** Actions → *Publicar o site* → Run workflow. Depois *Notícias* → Run workflow e *Pauta do programa* → Run workflow.
-6. **Primeiro administrador.** Abra `https://<projeto>.pages.dev/setup.html`, informe o `SETUP_TOKEN`, nome, usuário e senha. A tela só funciona enquanto não existe nenhum usuário. Depois disso, pode apagar o `SETUP_TOKEN` na Cloudflare.
-7. **Equipe.** Entre como administrador → menu do nome → *Usuários* → crie cada pessoa com senha provisória. Ela troca a senha no primeiro acesso.
-8. **Domínio próprio (opcional).** No projeto Pages → Custom domains, por exemplo `redacao.cliente.com.br`.
+5. **Primeira publicação.** Actions → *Publicar o site* → Run workflow.
+6. **Primeiro administrador.** Abra `https://<projeto>.pages.dev/setup.html`, informe o `SETUP_TOKEN`, nome, usuário e senha. A tela só funciona enquanto não existe nenhum usuário. Depois, apague o `SETUP_TOKEN` na Cloudflare.
+7. **Configurações (o próprio cliente faz).** O administrador entra → menu do nome → *Configurações*: veículo, logo (o painel propõe três paletas a partir dele), programa, dias e horários, blocos, linha editorial, região, portais regionais e horários das edições. Ao salvar, o painel se ajusta sozinho em 2 a 4 minutos.
+8. **Ligar as rotinas automáticas.** GitHub → Variables → `ATIVO` = `sim`. Antes disso, notícias e pauta só rodam pelos botões do painel, o que é bom para o período de teste.
+9. **Equipe.** Menu do nome → *Usuários* → crie cada pessoa com senha provisória. Ela troca a senha no primeiro acesso.
+10. **Domínio próprio (opcional).** No projeto Pages → Custom domains, por exemplo `redacao.cliente.com.br`.
 
 ## Custos a acompanhar
 

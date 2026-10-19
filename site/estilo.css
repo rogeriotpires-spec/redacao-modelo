@@ -1,10 +1,13 @@
 /* Complementos comuns: menu do usuário, janela de senha, aviso e cabeçalho com a cor do cliente */
-:root{--marca:#0b3d91}
-.hero{background:linear-gradient(135deg,var(--marca) 0%,#0d1b2e 75%)!important}
+:root{--marca:#0b3d91;--marca-esc:#0d1b2e;--acento:#a63922;--destaque:#ffd23f;--sobre-destaque:#0d1b2e}
+.hero{background:linear-gradient(135deg,var(--marca) 0%,var(--marca-esc) 78%)!important}
+.hlogo{display:block;max-height:56px;max-width:220px;width:auto;margin:0 0 14px;padding:8px 12px;background:#fff;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+@media (max-width:640px){.hlogo{max-height:44px}}
 .hero::before{display:none!important}
 .hero-in{grid-template-columns:1fr auto!important}
 .umenu{position:relative;margin-left:auto}
 .ubtn{font:600 14px Inter,sans-serif;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer}
+.upop[hidden]{display:none!important}
 .upop{position:absolute;right:0;top:calc(100% + 6px);min-width:220px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.18);padding:6px;z-index:50;display:flex;flex-direction:column}
 .upop .uhead{padding:8px 10px;border-bottom:1px solid var(--border);margin-bottom:4px;display:flex;flex-direction:column}
 .upop .uhead small{color:var(--muted);font-size:12px}

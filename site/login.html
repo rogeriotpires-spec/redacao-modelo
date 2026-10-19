@@ -36,7 +36,7 @@ button:disabled{opacity:.6;cursor:wait}
   <p class="rod">Esqueceu a senha? Peça ao administrador da sua redação para criar uma nova.</p>
 </form>
 <script>
-fetch("/cliente.json").then(r=>r.json()).then(c=>{if(c.cor)document.documentElement.style.setProperty("--marca",c.cor);document.getElementById("cli").textContent=[c.produto,c.veiculo].filter(Boolean).join(" · ");document.title="Entrar · "+(c.veiculo||c.produto||"")}).catch(()=>{});
+fetch("/cliente.json").then(r=>r.json()).then(c=>{const k=c.cores||{primaria:c.cor};if(k.primaria)document.documentElement.style.setProperty("--marca",k.primaria);if(c.logo){const im=new Image();im.src="/"+c.logo+"?v="+(c.versao||"");im.alt=c.veiculo||"";im.style.cssText="display:block;max-height:64px;max-width:220px;margin:0 0 16px";im.onerror=()=>im.remove();document.getElementById("cli").before(im)}document.getElementById("cli").textContent=[c.produto,c.veiculo].filter(Boolean).join(" · ");document.title="Entrar · "+(c.veiculo||c.produto||"")}).catch(()=>{});
 const f=document.getElementById("f"),e=document.getElementById("e"),b=document.getElementById("b");
 f.onsubmit=async ev=>{ev.preventDefault();e.textContent="";b.disabled=true;
   try{const r=await fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({login:f.login.value.trim().toLowerCase(),senha:f.senha.value})});

@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Configurações</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#f3f2ee;--surface:#fcfcfb;--surface-2:#f6f5f1;--border:#e3e1da;--text:#0b0b0b;--text-2:#52514e;--muted:#85847e;--good:#0f7a4c;--good-bg:#e5f4ec;--bad:#b4302f;--bad-bg:#fbe6e5}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#111110;--surface:#1a1a19;--surface-2:#222220;--border:#2f2f2c;--text:#fff;--text-2:#c3c2b7;--muted:#8f8e86;--good:#4cc28a;--good-bg:#16291f;--bad:#ef7b7a;--bad-bg:#311a1a}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#111110;--surface:#1a1a19;--surface-2:#222220;--border:#2f2f2c;--text:#fff;--text-2:#c3c2b7;--muted:#8f8e86;--good:#4cc28a;--good-bg:#16291f;--bad:#ef7b7a;--bad-bg:#311a1a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif}
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:980px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.tabs{display:flex;gap:4px;align-items:center;width:100%;flex-wrap:wrap}.tabs a{padding:7px 12px;border-radius:999px;text-decoration:none;color:var(--text-2);font-weight:600;font-size:14px}.tabs a.on{background:var(--text);color:var(--surface)}
+main{max-width:980px;margin:0 auto;padding:22px 16px 120px}
+h1{font:700 30px/1.1 Fraunces,Georgia,serif;margin:0 0 4px}.sub{color:var(--text-2);margin:0 0 20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:16px}
+.card h2{font-size:17px;margin:0 0 4px}.card .hint{color:var(--muted);font-size:13px;margin:0 0 14px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:720px){.g2,.g4{grid-template-columns:1fr 1fr}}
+@media (max-width:460px){.g2{grid-template-columns:1fr}}
+label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:600;color:var(--text-2);min-width:0}
+label small{font-weight:400;color:var(--muted)}
+input,select,textarea{font:15px Inter,sans-serif;padding:9px 11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text);min-width:0;width:100%}
+textarea{min-height:92px;resize:vertical;line-height:1.45}
+.full{grid-column:1/-1}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips label{flex-direction:row;align-items:center;gap:0;font-size:13px}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips span{display:inline-block;padding:6px 11px;border:1px solid var(--border);border-radius:999px;background:var(--bg);color:var(--text-2);cursor:pointer;font-weight:600;font-variant-numeric:tabular-nums}
+.chips input:checked+span{background:var(--text);color:var(--surface);border-color:var(--text)}
+.chips input:focus-visible+span{outline:2px solid var(--marca,#0b3d91);outline-offset:2px}
+.btn{font:700 14px Inter,sans-serif;padding:10px 14px;border:0;border-radius:10px;background:var(--text);color:var(--surface);cursor:pointer}
+.btn.ghost{background:var(--surface);color:var(--text);border:1px solid var(--border)}.btn.sm{padding:6px 10px;font-size:12.5px;font-weight:600}
+.portal{display:grid;grid-template-columns:1.1fr 2fr 110px auto;gap:8px;margin-bottom:8px;align-items:center}
+@media (max-width:640px){.portal{grid-template-columns:1fr 1fr}.portal .u{grid-column:1/-1;order:-1}}
+.logo-box{display:grid;grid-template-columns:220px 1fr;gap:18px;align-items:start}
+@media (max-width:640px){.logo-box{grid-template-columns:1fr}}
+.drop{border:2px dashed var(--border);border-radius:14px;min-height:150px;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;cursor:pointer;background:var(--surface-2);color:var(--muted);font-size:13px;position:relative}
+.drop img{max-width:100%;max-height:120px;display:block}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.props{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:720px){.props{grid-template-columns:1fr}}
+.prop{border:2px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;background:var(--surface);text-align:left;padding:0;font:inherit;color:inherit}
+.prop[aria-pressed="true"]{border-color:var(--text);box-shadow:0 0 0 3px color-mix(in srgb,var(--text) 18%,transparent)}
+.prop .hero-m{padding:14px 12px 12px;color:#fff;min-height:96px;display:flex;flex-direction:column;gap:8px}
+.prop .hero-m b{font:700 15px Fraunces,Georgia,serif}
+.prop .hero-m i{font-style:normal;align-self:flex-start;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px}
+.prop .foot{padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;font-weight:600}
+.prop .foot .sw{display:flex;gap:4px}.prop .foot .sw s{width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.12);display:block}
+.prop .tag{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.ajuste{display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap;font-size:13px;color:var(--text-2)}
+.ajuste input[type=color]{width:46px;height:34px;padding:2px;border-radius:8px}
+.barra{position:fixed;left:0;right:0;bottom:0;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--border);z-index:30}
+.barra-in{max-width:980px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
+.msg{font-size:13.5px;flex:1;min-width:0}.msg.ok{color:var(--good)}.msg.err{color:var(--bad)}
+.carregando{color:var(--muted);padding:30px 0}
+</style>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<nav><div class="nav-in"><div class="tabs"><a href="/">Notícias</a><a href="pauta.html">Pauta do programa</a><a href="configuracoes.html" class="on" aria-current="page">Configurações</a></div></div></nav>
+<main>
+  <h1>Configurações</h1>
+  <p class="sub">Tudo o que o painel precisa saber sobre o seu veículo. Ao salvar, o painel se ajusta sozinho em 2 a 4 minutos.</p>
+  <div id="carregando" class="carregando">Carregando…</div>
+  <form id="f" hidden autocomplete="off">
+
+    <section class="card">
+      <h2>Veículo e marca</h2>
+      <p class="hint">Envie o logo: o painel tira as cores dele e propõe combinações harmônicas para o cabeçalho, os botões e o PDF da pauta.</p>
+      <div class="g2" style="margin-bottom:16px">
+        <label>Nome do veículo<input name="veiculo" required maxlength="80" placeholder="Ex.: Jovem Pan News BH"></label>
+        <label>Empresa (cliente)<input name="cliente" maxlength="80"></label>
+      </div>
+      <div class="logo-box">
+        <div>
+          <div class="drop" id="drop"><span id="dropTxt">Clique ou arraste o logo<br><small>PNG, JPG, WebP ou SVG</small></span><input type="file" id="logo" accept="image/png,image/jpeg,image/webp,image/svg+xml" aria-label="Logo"></div>
+        </div>
+        <div>
+          <div class="props" id="props"></div>
+          <div class="ajuste"><label style="flex-direction:row;align-items:center;gap:8px">Ajustar a cor principal <input type="color" id="corManual"></label><span id="contr" class="small"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Programa</h2>
+      <p class="hint">A pauta é gerada todo dia de programa, no horário que você escolher, com o PDF para a bancada.</p>
+      <div class="g2">
+        <label>Nome do programa<input name="p_nome" required maxlength="80"></label>
+        <label>Apresentadores <small>separe por vírgula</small><input name="p_apres" maxlength="400"></label>
+      </div>
+      <div style="margin:14px 0 6px;font-size:12.5px;font-weight:600;color:var(--text-2)">Dias do programa</div>
+      <div class="chips" id="dias"></div>
+      <div class="g4" style="margin-top:14px">
+        <label>Horário no ar<input type="time" name="p_horario" required></label>
+        <label>Pauta pronta às<input type="time" name="p_gera" required><small>horário de Brasília</small></label>
+        <label>Itens na pauta<input type="number" name="p_itens" min="3" max="15" required></label>
+        <label>Perguntas por item<input type="number" name="p_perg" min="1" max="6" required></label>
+      </div>
+      <label class="full" style="margin-top:14px">Blocos do programa <small>um por linha; use "Região" para o bloco da sua região</small><textarea name="p_blocos" rows="5"></textarea></label>
+    </section>
+
+    <section class="card">
+      <h2>Linha editorial</h2>
+      <p class="hint">É o que orienta a escolha das notícias, o ângulo da pauta e o tom dos textos.</p>
+      <label class="full">Linha editorial do veículo<textarea name="linha" rows="4" maxlength="1500" required></textarea></label>
+      <div class="g2" style="margin-top:12px">
+        <label>Temas prioritários <small>um por linha</small><textarea name="temas" rows="6"></textarea></label>
+        <label>Veículos de referência da linha <small>um por linha</small><textarea name="fontes" rows="6"></textarea></label>
+      </div>
+      <label class="full" style="margin-top:12px">Regras de estilo <small>uma por linha</small><textarea name="voz" rows="5"></textarea></label>
+    </section>
+
+    <section class="card">
+      <h2>Região de cobertura</h2>
+      <p class="hint">Os portais e as buscas da sua região entram em toda edição, ao lado dos grandes portais nacionais.</p>
+      <div class="g2">
+        <label>Região<input name="r_nome" maxlength="60" placeholder="Ex.: Minas Gerais"></label>
+        <label>Nome do bloco na pauta<input name="r_rotulo" maxlength="40" placeholder="Ex.: Minas Gerais"></label>
+      </div>
+      <div style="margin:14px 0 8px;font-size:12.5px;font-weight:600;color:var(--text-2)">Portais da região</div>
+      <div id="portais"></div>
+      <button type="button" class="btn ghost sm" id="addPortal">+ Portal</button>
+      <div class="g2" style="margin-top:14px">
+        <label>Buscas da região <small>uma por linha, ex.: "Prefeitura de Belo Horizonte" OR "Câmara de BH"</small><textarea name="r_buscas" rows="4"></textarea></label>
+        <label>Buscas de esporte <small>uma por linha, ex.: Atlético-MG OR Cruzeiro</small><textarea name="esportes" rows="4"></textarea></label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Notícias do dia</h2>
+      <p class="hint">Horários das edições (Brasília). Cada edição leva de 20 a 40 minutos e fica pronta perto do horário marcado. Até 6 por dia.</p>
+      <div class="chips" id="horas"></div>
+    </section>
+  </form>
+</main>
+<div class="barra"><div class="barra-in"><span class="msg" id="msg" role="status"></span><button class="btn" id="salvar" form="f" disabled>Salvar</button></div></div>
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+<script src="paleta.js"></script>
+<script>
+const $=s=>document.querySelector(s),esc=Painel.esc,F=$("#f");
+const DIAS=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
+let CFG=null,SHA=null,LOGO=null,PROPS=[],ESC=0,COR2=null;
+const linhas=a=>(a||[]).join("\n"),deLinhas=t=>String(t||"").split("\n").map(x=>x.trim()).filter(Boolean);
+function msg(t,c){const m=$("#msg");m.className="msg"+(c?" "+c:"");m.textContent=t}
+
+function portal(p={}){const d=document.createElement("div");d.className="portal";
+  d.innerHTML=`<input class="n" placeholder="Nome" maxlength="60" value="${esc(p.name||"")}" aria-label="Nome do portal"><input class="u" placeholder="https://..." maxlength="200" value="${esc(p.url||"")}" aria-label="Endereço do portal"><select class="t" aria-label="Peso"><option value="2">Ler sempre</option><option value="3">Só buscar</option></select><button type="button" class="btn ghost sm" aria-label="Remover portal">✕</button>`;
+  d.querySelector(".t").value=String(p.tier||2);d.querySelector("button").onclick=()=>d.remove();$("#portais").append(d)}
+
+function propostaHTML(p,i){return `<button type="button" class="prop" data-i="${i}" aria-pressed="${i===ESC}">
+  <div class="hero-m" style="background:linear-gradient(135deg,${p.primaria} 0%,${p.escura} 78%)"><span class="tag" style="opacity:.8">${esc(CFG.veiculo||"Veículo")}</span><b>Pauta do programa</b><i style="background:${p.destaque};color:${p.sobre_destaque}">↻ Gerar pauta</i></div>
+  <div class="foot"><span>${esc(p.nome)}</span><span class="sw">${[p.primaria,p.escura,p.acento,p.destaque].map(c=>`<s style="background:${c}"></s>`).join("")}</span></div></button>`}
+function mostraProps(){$("#props").innerHTML=PROPS.map(propostaHTML).join("");
+  const p=PROPS[ESC];if(p){$("#corManual").value=p.primaria;Paleta.aplica(p);
+    $("#contr").textContent=`Contraste do texto: ${Paleta.contraste("#ffffff",p.primaria).toFixed(1)}:1 no cabeçalho, ${Paleta.contraste(p.acento,"#fcfcfb").toFixed(1)}:1 nos destaques`}}
+$("#props").onclick=e=>{const b=e.target.closest(".prop");if(!b)return;ESC=+b.dataset.i;mostraProps()};
+$("#corManual").oninput=e=>{const p=Paleta.monta(e.target.value,COR2,"Personalizada");const i=PROPS.findIndex(x=>x.nome==="Personalizada");if(i>=0)PROPS[i]=p;else PROPS.push(p);ESC=PROPS.indexOf(p);mostraProps()};
+
+// logo: abre no navegador, reduz para no máximo 600 px e converte para PNG (SVG vira imagem, sem código)
+$("#logo").onchange=async e=>{const f=e.target.files[0];if(!f)return;
+  if(f.size>8e6){msg("Esse arquivo é grande demais (máximo 8 MB).","err");return}
+  const url=URL.createObjectURL(f),img=new Image();img.decoding="async";
+  img.onload=()=>{let w=img.naturalWidth||600,h=img.naturalHeight||300;const k=Math.min(1,600/Math.max(w,h));w=Math.round(w*k);h=Math.round(h*k);
+    const cv=Object.assign(document.createElement("canvas"),{width:w,height:h});cv.getContext("2d").drawImage(img,0,0,w,h);
+    LOGO=cv.toDataURL("image/png");URL.revokeObjectURL(url);
+    $("#dropTxt").innerHTML=`<img src="${LOGO}" alt="Logo enviado">`;
+    const im2=new Image();im2.onload=()=>{const c=Paleta.cores(im2);COR2=c.vivas[1]?.hex||null;PROPS=Paleta.propostas(c);ESC=0;mostraProps();msg("Escolha uma das combinações e salve.")};im2.src=LOGO};
+  img.onerror=()=>msg("Não consegui abrir essa imagem.","err");img.src=url};
+
+function preenche(c){CFG=c;const P=c.programa||{},R=c.regiao||{},M=c.marca||{};
+  F.veiculo.value=c.veiculo||"";F.cliente.value=c.cliente||"";
+  F.p_nome.value=P.nome||"";F.p_apres.value=(P.apresentadores||[]).join(", ");F.p_horario.value=P.horario||"07:00";F.p_gera.value=P.gera_pauta_as||"05:30";
+  F.p_itens.value=P.itens||6;F.p_perg.value=P.perguntas_por_item||3;F.p_blocos.value=linhas(P.blocos);
+  $("#dias").innerHTML=DIAS.map((d,i)=>`<label><input type="checkbox" name="dia" value="${i}" ${(P.dias||[]).includes(i)?"checked":""}><span>${d}</span></label>`).join("");
+  F.linha.value=c.linha_editorial||"";F.temas.value=linhas(c.temas_prioritarios);F.fontes.value=linhas(c.fontes_da_linha);F.voz.value=linhas(c.voz);
+  F.r_nome.value=R.nome||"";F.r_rotulo.value=R.rotulo_bloco||"";F.r_buscas.value=linhas(R.buscas);F.esportes.value=linhas(c.esportes_buscas);
+  $("#portais").innerHTML="";(R.portais||[]).forEach(portal);if(!(R.portais||[]).length)portal();
+  const H=(c.noticias?.edicoes||[]).map(e=>parseInt(e,10));
+  $("#horas").innerHTML=Array.from({length:24},(_,h)=>`<label><input type="checkbox" name="hora" value="${h}" ${H.includes(h)?"checked":""}><span>${String(h).padStart(2,"0")}h</span></label>`).join("");
+  const atual=M.cores||{primaria:M.cor||"#0b3d91"};PROPS=[{nome:"Atual",...Paleta.monta(atual.primaria,null,"Atual"),...atual,nome:"Atual"}];ESC=0;mostraProps();
+  if(M.logo)$("#dropTxt").innerHTML=`<img src="/${esc(M.logo)}?v=${Date.now()}" alt="Logo atual" onerror="this.parentNode.textContent='Clique ou arraste o logo'"><br><small>Clique para trocar</small>`;
+}
+function coleta(){const P=PROPS[ESC]||{};
+  return {veiculo:F.veiculo.value,cliente:F.cliente.value,
+    programa:{nome:F.p_nome.value,apresentadores:F.p_apres.value.split(",").map(x=>x.trim()).filter(Boolean),dias:[...F.querySelectorAll("[name=dia]:checked")].map(x=>+x.value),
+      horario:F.p_horario.value,gera_pauta_as:F.p_gera.value,itens:+F.p_itens.value,perguntas_por_item:+F.p_perg.value,blocos:deLinhas(F.p_blocos.value),
+      virada_hora:CFG.programa?.virada_hora,linhas_resumo:CFG.programa?.linhas_resumo,metafora_percentual:CFG.programa?.metafora_percentual},
+    linha_editorial:F.linha.value,temas_prioritarios:deLinhas(F.temas.value),fontes_da_linha:deLinhas(F.fontes.value),voz:deLinhas(F.voz.value),
+    regiao:{nome:F.r_nome.value,rotulo_bloco:F.r_rotulo.value,buscas:deLinhas(F.r_buscas.value),portais:[...document.querySelectorAll(".portal")].map(d=>({name:d.querySelector(".n").value,url:d.querySelector(".u").value,tier:+d.querySelector(".t").value})).filter(p=>p.name&&p.url)},
+    esportes_buscas:deLinhas(F.esportes.value),noticias:{edicoes:[...F.querySelectorAll("[name=hora]:checked")].map(x=>x.value.padStart(2,"0")+"h")},
+    marca:{cores:{primaria:P.primaria,escura:P.escura,acento:P.acento,destaque:P.destaque,sobre_destaque:P.sobre_destaque}}}}
+F.addEventListener("change",e=>{if(e.target.name==="hora"&&F.querySelectorAll("[name=hora]:checked").length>6){e.target.checked=false;msg("No máximo 6 edições por dia.","err")}});
+$("#addPortal").onclick=()=>portal();
+F.onsubmit=async e=>{e.preventDefault();const b=$("#salvar");b.disabled=true;msg("Salvando…");
+  try{const r=await fetch("/api/config",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({cliente:coleta(),logo:LOGO,sha:SHA})});
+    const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||"Erro "+r.status);
+    SHA=j.sha;LOGO=null;msg("Salvo. O painel está se ajustando; esta página recarrega quando terminar (2 a 4 minutos).","ok");espera()}
+  catch(err){msg(err.message,"err")}b.disabled=false};
+async function espera(){const v0=Painel.cliente?.versao;const t0=Date.now();
+  while(Date.now()-t0<8*60e3){await new Promise(r=>setTimeout(r,15000));
+    const c=await fetch("/cliente.json?"+Date.now(),{cache:"no-store"}).then(r=>r.json()).catch(()=>null);
+    if(c&&c.versao&&c.versao!==v0){msg("Pronto! Recarregando…","ok");setTimeout(()=>location.reload(),800);return}}
+  msg("Salvo. A atualização está demorando; recarregue em alguns minutos.","ok")}
+Painel.pronto.then(()=>fetch("/api/config",{cache:"no-store"})).then(async r=>{const j=await r.json();if(!r.ok)throw new Error(j.error||"Erro "+r.status);SHA=j.sha;preenche(j.cliente);$("#carregando").remove();F.hidden=false;$("#salvar").disabled=false})
+  .catch(e=>{$("#carregando").textContent="Não consegui carregar as configurações: "+e.message});
+</script>
+</body>
+</html>

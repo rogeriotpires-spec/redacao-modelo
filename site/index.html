@@ -52,8 +52,8 @@ a{color:inherit}
 .hero-stats span{font-size:12px;opacity:.75}
 .hero-meta{max-width:1180px;margin:0 auto;padding:0 16px 22px;font-size:12px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
 .hero-meta #updated{opacity:.75}
-.refresh{font:inherit;font-size:12px;font-weight:700;color:#0d1b2e;background:#ffd23f;border:1px solid #ffd23f;border-radius:999px;padding:5px 14px;cursor:pointer;box-shadow:0 2px 10px rgba(255,210,63,.35)}
-.refresh:hover{background:#ffe17a;border-color:#ffe17a}
+.refresh{font:inherit;font-size:12px;font-weight:700;color:var(--sobre-destaque,#0d1b2e);background:var(--destaque,#ffd23f);border:1px solid var(--destaque,#ffd23f);border-radius:999px;padding:5px 14px;cursor:pointer;box-shadow:0 2px 10px rgba(255,210,63,.35)}
+.refresh:hover{filter:brightness(1.06)}
 .refresh:disabled{color:rgba(255,255,255,.55);background:transparent;border:1px dashed rgba(255,255,255,.35);box-shadow:none;cursor:wait}
 #refresh-st{opacity:.9}
 nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
@@ -386,7 +386,7 @@ Painel.pronto.then(()=>Promise.all([fetch("noticias/config.json?"+Date.now()).th
   CFG=c;method();fbarSetup();
   fetch("programa/index.json?"+Date.now()).then(r=>r.json()).then(ix=>Promise.all((ix.days||[]).sort().slice(-3).map(d=>fetch(`programa/${d}.json?`+Date.now()).then(r=>r.json()).then(p=>(p.itens||[]).forEach(x=>{if(x.avulsa&&x.pedido)(ED&&ED.items||[]).forEach(it=>{if(String(x.pedido).includes(it.title))DONEP[it.title]=d})})).catch(()=>{})))).then(()=>{if(ED&&Object.keys(DONEP).length)render()}).catch(()=>{});
   EDS=(ix.editions||[]).sort();
-  if(!EDS.length){$("#updated").textContent="A primeira edição sai no próximo horário (6h, 12h ou 19h).";$("#list").innerHTML=`<div class="empty">Nenhuma edição publicada ainda.</div>`;return}
+  if(!EDS.length){$("#updated").textContent="A primeira edição sai no próximo horário ("+((Painel.cliente&&Painel.cliente.edicoes)||[]).join(", ")+").";$("#list").innerHTML=`<div class="empty">Nenhuma edição publicada ainda.</div>`;return}
   $("#ed").innerHTML=EDS.slice().reverse().map(e=>`<option value="${e}">${label(e)}</option>`).join("");
   $("#ed").onchange=e=>load(e.target.value);$("#prev").onclick=()=>load(EDS[EDS.indexOf(CUR)-1]);$("#next").onclick=()=>load(EDS[EDS.indexOf(CUR)+1]);
   load(EDS[EDS.length-1]); /* abre sempre a edição mais recente; as anteriores ficam nas setas e na lista */

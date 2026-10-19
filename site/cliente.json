@@ -23,5 +23,13 @@
   "19h"
  ],
  "cor": "#0b3d91",
- "logo": "marca/logo.png"
+ "cores": {
+  "primaria": "#0b3d91",
+  "escura": "#091936",
+  "acento": "#2d5fb6",
+  "destaque": "#fad03e",
+  "sobre_destaque": "#091936"
+ },
+ "logo": null,
+ "versao": "81ed2195d8"
 }
