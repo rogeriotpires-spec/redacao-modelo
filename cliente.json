@@ -3,6 +3,7 @@
   "produto": "Redação Inteligente",
   "cliente": "Demonstração",
   "veiculo": "Rádio Demonstração",
+  "cobertura": "regional",
   "programa": {
     "nome": "Jornal da Manhã",
     "apresentadores": [

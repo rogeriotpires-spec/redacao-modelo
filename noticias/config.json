@@ -281,6 +281,12 @@
    "tier": 3
   },
   {
+   "name": "Estado de Minas",
+   "url": "https://www.em.com.br",
+   "camp": "regional",
+   "tier": 3
+  },
+  {
    "name": "Yahoo Notícias",
    "url": "https://br.noticias.yahoo.com",
    "camp": "centro",
@@ -303,6 +309,12 @@
    "url": "https://veja.abril.com.br",
    "camp": "centro",
    "tier": 2
+  },
+  {
+   "name": "O Tempo",
+   "url": "https://www.otempo.com.br",
+   "camp": "regional",
+   "tier": 3
   },
   {
    "name": "Diário do Nordeste",
@@ -411,18 +423,6 @@
    "url": "https://opopular.com.br",
    "camp": "regional",
    "tier": 3
-  },
-  {
-   "name": "O Tempo",
-   "url": "https://www.otempo.com.br",
-   "camp": "regional",
-   "tier": 2
-  },
-  {
-   "name": "Estado de Minas",
-   "url": "https://www.em.com.br",
-   "camp": "regional",
-   "tier": 2
   },
   {
    "name": "Itatiaia",

@@ -22,6 +22,8 @@
   "12h",
   "19h"
  ],
+ "cobertura": "regional",
+ "regiao": "Minas Gerais",
  "cor": "#0b3d91",
  "cores": {
   "primaria": "#0b3d91",
@@ -31,5 +33,5 @@
   "sobre_destaque": "#091936"
  },
  "logo": null,
- "versao": "81ed2195d8"
+ "versao": "b18b0b337b"
 }
